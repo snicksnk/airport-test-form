@@ -23,7 +23,7 @@ export default class AirportSelectHelper extends Component {
                 iata: item.iata,
                 isCity: false,
                 city: item.name,
-                name: item.airportName,
+                name: item.name,
                 cityIata: item.cityIata,
             }))
             .groupBy(item => item.city)
@@ -53,6 +53,11 @@ export default class AirportSelectHelper extends Component {
         loadAirPorts(query);
     }
 
+    renderItemTitle(item) {
+        return `${item.name} (${item.iata})`;
+    }
+
+    @autobind
     renderMenu(results, menuProps) {
         return (
             <Menu {...menuProps}>
@@ -60,7 +65,7 @@ export default class AirportSelectHelper extends Component {
                     const key = index;
                     return (
                         <MenuItem
-                          option={result.name}
+                          option={this.renderItemTitle(result)}
                           position={index}
                           key={key}
                           className={ClassNames({
@@ -68,7 +73,7 @@ export default class AirportSelectHelper extends Component {
                               [styles.airPort]: !result.isCity
                           })}
                         >
-                            {result.name} ({result.iata})
+                            {this.renderItemTitle(result)}
                         </MenuItem>);
                 })}
             </Menu>
@@ -77,23 +82,30 @@ export default class AirportSelectHelper extends Component {
 
     render() {
         const { airPortsItems } = this.state;
+        const { id } = this.props;
+
         return (
-            <Typeahead
-              onInputChange={this.handleChange}
-              options={airPortsItems}
-              filterBy={() => true}
-              onFocus={this.handleFocus}
-              renderMenu={this.renderMenu}
-            />
+            <div id={id}>
+                <Typeahead
+                  id={id}
+                  onInputChange={this.handleChange}
+                  options={airPortsItems}
+                  filterBy={() => true}
+                  onFocus={this.handleFocus}
+                  renderMenu={this.renderMenu}
+                />
+            </div>
         );
     }
 }
 
 AirportSelectHelper.propTypes = {
+    id: PropTypes.string,
     loadAirPorts: PropTypes.func.isRequired,
     airPortsItems: PropTypes.array
 };
 
 AirportSelectHelper.defaultProps = {
-    airPortsItems: []
+    airPortsItems: [],
+    id: null
 };
