@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
+import Immutable from 'immutable';
 import rootReducer from '../reducers';
 import sagas from '../sagas';
 

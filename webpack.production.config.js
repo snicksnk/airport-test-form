@@ -78,6 +78,15 @@ module.exports = {
             test: /\.json?$/,
             loader: 'json'
         }, {
+            test: /\.css$/,
+            include: path.resolve(__dirname, "node_modules"),
+            loader: 'style-loader!css-loader'
+        }, {
+            test:   /\.css$/,
+            //TODO Add production version
+            include: path.resolve(__dirname, "app"),
+            loader: "style!css?-minimize&modules&localIdentName=[name]-[local]--[hash:base64:5]&sourceMap!postcss"
+        }, {
             test: /\.scss$/,
             // we extract the styles into their own .css file instead of having
             // them inside the js.
