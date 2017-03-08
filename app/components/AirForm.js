@@ -10,7 +10,7 @@ export default class AirForm extends Component {
 
         return (<form className={styles.form}>
             <label htmlFor="numberOfPassengers" className={styles.label}>Количество пассажиров</label>
-            <input id="numberOfPassengers" type="number" />
+            <input id="numberOfPassengers" className={styles.numberOfPassengers} type="number" min="1" step="1" max="9" />
 
             <label htmlFor="departureAirport" className={styles.label}>Аэропорт вылета</label>
             <AirportSelect id="departureAirport" loadAirPorts={loadAirPorts} airPortsItems={airPortsItems} />

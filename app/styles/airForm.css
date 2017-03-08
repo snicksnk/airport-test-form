@@ -1,8 +1,14 @@
 .form {
     width: 300px;
+    padding-left: 10px;
 }
 
 .label {
     display: block;
     margin-top: 10px;
+}
+
+.numberOfPassengers:invalid {
+    color: red;
+    border-color: red;
 }
